@@ -118,8 +118,9 @@ int array_and_pointer()
   printf("----------------\n");
 }
 
-int array_pointer() {
-  printf("array pointer----------------\n");
+int pointer_of_array_01()
+{
+  printf("pointer_of_array_01----------------\n");
   int arr[10];
 
   // 모두 동일한 첫번째 요소의 포인터가 반환됨
@@ -128,7 +129,7 @@ int array_pointer() {
   printf("&arr[0]: %p \n", &arr[0]);
 
   // 배열 포인터의 선언
-  int (*p_arr)[];
+  int(*p_arr)[];
   p_arr = &arr;
 
   // 배열 포인터에 배열을 넣을 순 없다.
@@ -143,12 +144,89 @@ int array_pointer() {
   printf("----------------\n");
 }
 
+int pointer_of_array_02()
+{
+  printf("pointer_of_array_02----------------\n");
+
+  int arr[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+
+  // 배열의 포인터 선언
+  // 이렇게 포인터 참조를 만들 수 있음
+  int(*ptr)[4] = arr;
+
+  printf("&arr[0]: %p\n", &arr[0]);
+  printf("arr: %p\n", arr);
+  printf("ptr: %p\n", ptr);
+  printf("&ptr: %p\n", &ptr); // 배열 포인터의 메모리 주소
+
+  printf("&arr[1]: %p\n", &arr[1]);
+  printf("arr + 1: %p\n", arr + 1);
+  printf("&arr[0] + 1: %p\n", &arr[0] + 1);
+
+  // 배열 포인터로 하위 배열을 꺼낼 수 있음
+  int(*row_0)[] = &arr[0];
+  int(*row_1)[] = &arr[1];
+
+  // 2차 배열에서의 포인터 활용
+  for (int(*pi)[4] = arr; pi < arr + 3; pi++)
+  {
+    printf("행: %p \n", *pi);
+
+    printf("열: ");
+    for (int *pj = *pi; pj < *pi + 4; pj++)
+    {
+      printf("%4d", *pj);
+    }
+
+    printf("\n");
+  }
+
+  printf("----------------\n");
+}
+
+int pointers_array_01()
+{
+  printf("pointers_array_01----------------\n");
+  // 포인터 배열 선언
+  int *ptr[3];
+  int a = 3;
+  // 포인터 배열에 포인터 할당
+  ptr[0] = &a;
+
+  printf("*ptr[0] %d\n", *ptr[0]);
+  printf("----------------\n");
+}
+
+int pointers_array_02()
+{
+  printf("pointers_array_02----------------\n");
+  char str[4][10] = {"hello", "world", "doodle", "google"};
+
+  char *ptr[4];
+
+  for (int i = 0; i < 4; i++)
+  {
+    ptr[i] = str[i];
+    printf("str[%d]: %s \n", i, str[i]);
+  }
+
+  for (char(*word)[10] = str; word < str + 4; word++)
+  {
+    printf("word: %s \n", *word);
+  }
+
+  printf("----------------\n");
+}
+
 int main()
 {
   basic();
   basic2();
   double_pointer();
   array_and_pointer();
-  array_pointer();
+  pointer_of_array_01();
+  pointer_of_array_02();
+  pointers_array_01();
+  pointers_array_02();
   return 0;
 }
