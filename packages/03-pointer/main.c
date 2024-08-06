@@ -14,7 +14,7 @@ int basic()
   return 0;
 }
 
-int var()
+int reference()
 {
   printf("--------------\n");
 
@@ -75,7 +75,7 @@ int constant_pointer_02() {
   return 0;
 }
 
-int pointer_add() {
+int pointer_calculate() {
   printf("--------------\n");
 
   int a;
@@ -86,6 +86,9 @@ int pointer_add() {
   // 포인터에서 1을 더하면 포인터 주소 + 포인터가 가리키는 자료형의 크기만큼 이동
   printf("pa + 1 의 값: %p \n", pa + 1);
 
+  // 포인터에서 1을 빼면 포인터 주소 - 포인터가 가리키는 자료형의 크기만큼 이동
+  printf("pa - 1 의 값: %p \n", pa - 1);
+
   printf("--------------\n");
   return 0;
 }
@@ -93,9 +96,9 @@ int pointer_add() {
 int main()
 {
   basic();
-  var();
+  reference();
   constant_pointer_01();
   constant_pointer_02();
-  pointer_add();
+  pointer_calculate();
   return 0;
 }
